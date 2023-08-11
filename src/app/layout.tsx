@@ -1,8 +1,8 @@
-import './globals.css'
+import { Providers } from '@/store/Provider'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import { Suspense } from 'react'
+import Loading from './loadin'
+import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,8 +15,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    <Providers>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      
+      <body >
+        <Suspense fallback={<Loading/>}>
+
+        {children}
+        </Suspense>
+        </body>
     </html>
+    </Providers>
   )
 }
